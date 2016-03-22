@@ -29,7 +29,7 @@ end
 
 __END__
 diff --git a/ext/toolchain/commands1.py b/ext/toolchain/commands1.py
-index 9f4cb4a..0c7b0e3 100644
+index d0b0960..08693de 100644
 --- a/ext/toolchain/commands1.py
 +++ b/ext/toolchain/commands1.py
 @@ -450,7 +450,7 @@ class InternalCommands:
@@ -38,26 +38,6 @@ index 9f4cb4a..0c7b0e3 100644
  			
 -		elif sys.platform == "darwin":
 +		if sys.platform == "darwin":
-			macSdkMatch = re.match("(\d+)\.(\d+)", self.macSdk)
-			if not macSdkMatch:
-				raise Exception("unknown osx version: " + self.macSdk)
-@@ -776,15 +776,10 @@ class InternalCommands:
- 			raise Exception("Python 2.4 or greater required.")
- 
- 		(qMajor, qMinor, qRev) = self.getQmakeVersion()
--		if qMajor >= 5:
--			output = commands.getstatusoutput(
--				"macdeployqt %s/Synergy.app -verbose=2 -codesign='%s'" % (
--				targetDir, self.macIdentity))
--		else:
--			# no code signing available in old versions
--			output = commands.getstatusoutput(
--				"macdeployqt %s/Synergy.app -verbose=2" % (
--				targetDir))
-+		# no code signing available in old versions
-+		output = commands.getstatusoutput(
-+			"macdeployqt %s/Synergy.app -verbose=2" % (
-+			targetDir))
- 
- 		print output[1]
- 		if "ERROR" in output[1]:
+ 			macSdkMatch = re.match("(\d+)\.(\d+)", self.macSdk)
+ 			if not macSdkMatch:
+ 				raise Exception("unknown osx version: " + self.macSdk)
