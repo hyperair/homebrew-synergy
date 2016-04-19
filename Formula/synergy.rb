@@ -41,3 +41,15 @@ index d0b0960..08693de 100644
  			macSdkMatch = re.match("(\d+)\.(\d+)", self.macSdk)
  			if not macSdkMatch:
  				raise Exception("unknown osx version: " + self.macSdk)
+diff --git a/src/gui/src/CommandProcess.h b/src/gui/src/CommandProcess.h
+index 3ed935b..a654700 100644
+--- a/src/gui/src/CommandProcess.h
++++ b/src/gui/src/CommandProcess.h
+@@ -18,6 +18,7 @@
+ #ifndef COMMANDTHREAD_H
+ #define COMMANDTHREAD_H
+ 
++#include <QObject>
+ #include <QStringList>
+ 
+ class CommandProcess : public QObject
