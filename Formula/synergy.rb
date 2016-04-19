@@ -29,7 +29,7 @@ end
 
 __END__
 diff --git a/ext/toolchain/commands1.py b/ext/toolchain/commands1.py
-index d0b0960..302abd3 100644
+index d0b0960..41e699f 100644
 --- a/ext/toolchain/commands1.py
 +++ b/ext/toolchain/commands1.py
 @@ -450,7 +450,7 @@ class InternalCommands:
@@ -50,7 +50,7 @@ index d0b0960..302abd3 100644
  			
  			target = dir + "/Synergy.app/Contents/Frameworks"
  
-@@ -883,9 +883,13 @@ class InternalCommands:
+@@ -883,9 +883,14 @@ class InternalCommands:
  			for root, dirs, files in os.walk(target):
  				for dir in dirs:
  					if dir.startswith("Qt"):
@@ -63,6 +63,7 @@ index d0b0960..302abd3 100644
 +						destdir = os.path.join(target, dir, "Resources/")
 +
 +						if not os.path.exists(os.path.join(destdir, "Info.plist")):
++							print "Copying {} to {}".format(info_plist_file, destdir)
 +							shutil.copy(info_plist_file, destdir)
  
  	def signmac(self):
