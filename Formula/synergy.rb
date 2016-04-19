@@ -29,7 +29,7 @@ end
 
 __END__
 diff --git a/ext/toolchain/commands1.py b/ext/toolchain/commands1.py
-index d0b0960..00aaa3a 100644
+index d0b0960..302abd3 100644
 --- a/ext/toolchain/commands1.py
 +++ b/ext/toolchain/commands1.py
 @@ -450,7 +450,7 @@ class InternalCommands:
@@ -50,6 +50,23 @@ index d0b0960..00aaa3a 100644
  			
  			target = dir + "/Synergy.app/Contents/Frameworks"
  
+@@ -883,9 +883,13 @@ class InternalCommands:
+ 			for root, dirs, files in os.walk(target):
+ 				for dir in dirs:
+ 					if dir.startswith("Qt"):
+-						shutil.copy(
+-							frameworkRootDir + "/" + dir + "/Contents/Info.plist",
+-							target + "/" + dir + "/Resources/")
++						info_plist_file = os.path.join(frameworkRootDir,
++						                               dir,
++						                               "Contents/Info.plist")
++						destdir = os.path.join(target, dir, "Resources/")
++
++						if not os.path.exists(os.path.join(destdir, "Info.plist")):
++							shutil.copy(info_plist_file, destdir)
+ 
+ 	def signmac(self):
+ 		self.loadConfig()
 diff --git a/src/gui/src/CommandProcess.h b/src/gui/src/CommandProcess.h
 index 3ed935b..a654700 100644
 --- a/src/gui/src/CommandProcess.h
