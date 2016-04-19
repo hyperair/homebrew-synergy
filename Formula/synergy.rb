@@ -29,7 +29,7 @@ end
 
 __END__
 diff --git a/ext/toolchain/commands1.py b/ext/toolchain/commands1.py
-index d0b0960..41e699f 100644
+index d0b0960..ad1fd0b 100644
 --- a/ext/toolchain/commands1.py
 +++ b/ext/toolchain/commands1.py
 @@ -450,7 +450,7 @@ class InternalCommands:
@@ -41,7 +41,17 @@ index d0b0960..41e699f 100644
  			macSdkMatch = re.match("(\d+)\.(\d+)", self.macSdk)
  			if not macSdkMatch:
  				raise Exception("unknown osx version: " + self.macSdk)
-@@ -875,7 +875,7 @@ class InternalCommands:
+@@ -828,7 +828,8 @@ class InternalCommands:
+ 						if dir.startswith("Qt"):
+ 							self.try_chdir(target + "/" + dir +"/Versions")
+ 							self.symlink("5", "Current")
+-							self.move("../Resources", "5")
++							if not os.path.exists("5/Resources"):
++								self.move("../Resources", "5")
+ 							self.restore_chdir()
+ 
+ 							self.try_chdir(target + "/" + dir)
+@@ -875,7 +876,7 @@ class InternalCommands:
  				frameworkRootDir = "/Library/Frameworks"
  			else:
  				# TODO: auto-detect, qt can now be installed anywhere.
@@ -50,7 +60,7 @@ index d0b0960..41e699f 100644
  			
  			target = dir + "/Synergy.app/Contents/Frameworks"
  
-@@ -883,9 +883,14 @@ class InternalCommands:
+@@ -883,9 +884,14 @@ class InternalCommands:
  			for root, dirs, files in os.walk(target):
  				for dir in dirs:
  					if dir.startswith("Qt"):
