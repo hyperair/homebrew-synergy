@@ -29,7 +29,7 @@ end
 
 __END__
 diff --git a/ext/toolchain/commands1.py b/ext/toolchain/commands1.py
-index d0b0960..08693de 100644
+index d0b0960..00aaa3a 100644
 --- a/ext/toolchain/commands1.py
 +++ b/ext/toolchain/commands1.py
 @@ -450,7 +450,7 @@ class InternalCommands:
@@ -41,6 +41,15 @@ index d0b0960..08693de 100644
  			macSdkMatch = re.match("(\d+)\.(\d+)", self.macSdk)
  			if not macSdkMatch:
  				raise Exception("unknown osx version: " + self.macSdk)
+@@ -875,7 +875,7 @@ class InternalCommands:
+ 				frameworkRootDir = "/Library/Frameworks"
+ 			else:
+ 				# TODO: auto-detect, qt can now be installed anywhere.
+-				frameworkRootDir = "/Developer/Qt5.2.1/5.2.1/clang_64/lib"
++				frameworkRootDir = "/usr/local/Cellar/qt5/5.6.0/lib"
+ 			
+ 			target = dir + "/Synergy.app/Contents/Frameworks"
+ 
 diff --git a/src/gui/src/CommandProcess.h b/src/gui/src/CommandProcess.h
 index 3ed935b..a654700 100644
 --- a/src/gui/src/CommandProcess.h
