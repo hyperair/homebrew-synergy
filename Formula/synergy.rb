@@ -1,6 +1,7 @@
 class Synergy < Formula
   homepage "http://synergy-project.org"
   url "https://github.com/symless/synergy/archive/1.6.3-final.tar.gz"
+  version "1.6.3-final"
   sha256 "9740cb12e118c30ce94d4f5029d738198b31fec1814038c8631a7a031dba735d"
 
   depends_on "cmake" => :build
